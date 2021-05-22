@@ -1,5 +1,3 @@
-package Simulation;
-
 import java.util.ArrayList;
 /**
  *	A sink

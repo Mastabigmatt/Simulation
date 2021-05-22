@@ -4,8 +4,6 @@
  *	@version %I%, %G%
  */
 
-package Simulation;
-
 public class Simulation {
 
     public CEventList list;

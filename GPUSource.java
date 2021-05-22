@@ -7,7 +7,7 @@
  *	@author Joel Karel
  *	@version %I%, %G%
  */
-public class Source implements CProcess
+public class GPUSource implements CProcess
 {
 	/** Eventlist that will be requested to construct events */
 	private CEventList list;
@@ -29,14 +29,14 @@ public class Source implements CProcess
 	*	@param l	The eventlist that is requested to construct events
 	*	@param n	Name of object
 	*/
-	public Source(ProductAcceptor q,CEventList l,String n)
+	public GPUSource(ProductAcceptor q,CEventList l,String n)
 	{
 		list = l;
 		queue = q;
 		name = n;
 		meanArrTime=33;
 		// put first event in list for initialization
-		list.add(this,0,drawRandomExponential(meanArrTime)); //target,type,time
+		list.add(this,0,drawStationaryPoissonProcess(meanArrTime)); //target,type,time
 	}
 
 	/**
@@ -47,14 +47,14 @@ public class Source implements CProcess
 	*	@param n	Name of object
 	*	@param m	Mean arrival time
 	*/
-	public Source(ProductAcceptor q,CEventList l,String n,double m)
+	public GPUSource(ProductAcceptor q,CEventList l,String n,double m)
 	{
 		list = l;
 		queue = q;
 		name = n;
 		meanArrTime=m;
 		// put first event in list for initialization
-		list.add(this,0,drawRandomExponential(meanArrTime)); //target,type,time
+		list.add(this,0,drawStationaryPoissonProcess(meanArrTime)); //target,type,time
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class Source implements CProcess
 	*	@param n	Name of object
 	*	@param ia	interarrival times
 	*/
-	public Source(ProductAcceptor q,CEventList l,String n,double[] ia)
+	public GPUSource(ProductAcceptor q,CEventList l,String n,double[] ia)
 	{
 		list = l;
 		queue = q;
@@ -81,7 +81,7 @@ public class Source implements CProcess
 	public void execute(int type, double tme)
 	{
 		// show arrival
-		System.out.println("Arrival at time = " + tme);
+		System.out.println("GPU Job Arrival at time = " + tme);
 		// give arrived product to queue
 		Product p = new Product();
 		p.stamp(tme,"Creation",name);
@@ -89,7 +89,7 @@ public class Source implements CProcess
 		// generate duration
 		if(meanArrTime>0)
 		{
-			double duration = drawRandomExponential(meanArrTime);
+			double duration = drawStationaryPoissonProcess(meanArrTime);
 			// Create a new event in the eventlist
 			list.add(this,0,tme+duration); //target,type,time
 		}
@@ -106,13 +106,31 @@ public class Source implements CProcess
 			}
 		}
 	}
-	
-	public static double drawRandomExponential(double mean)
-	{
-		// draw a [0,1] uniform distributed number
-		double u = Math.random();
-		// Convert it into a exponentially distributed random variate with mean 33
-		double res = -mean*Math.log(u);
-		return res;
+        
+  //@TODO: THIS IS NOT CORRECT
+	/**
+	 * draw Stationary Poisson Process
+	 * mean interarrival time 5 hours
+	 * a normally distributed service time of on average 4 hours (before truncation)
+	 * a standard deviation of 50 minutes
+	 * the minimum job size is 1 minute
+	 * @param t
+	 * @return
+	 */
+    public static double drawStationaryPoissonProcess(double t)
+    {        
+    	double lambda = 0;
+    	if (t >= 8 * 60 * 60 && t < 18 * 60 * 60)
+    	{ 
+    		lambda = 1.0 / 60;        
+		} 
+        else 
+        {
+        	lambda = 0.2 / 60;
+    	}        
+    	return  -Math.log(1 - Math.random()) / lambda;    
 	}
+
+
+    
 }

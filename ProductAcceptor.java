@@ -1,4 +1,4 @@
-package Simulation;
+
 
 /**
  *	Blueprint for accepting products
