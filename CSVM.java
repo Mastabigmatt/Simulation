@@ -78,9 +78,9 @@ public class CSVM {
         FileWriter writer_2 = new FileWriter(csvFileStarted);
         FileWriter writer_3 = new FileWriter(csvFileCompleted);
 
-        writeLine(writer_1, Arrays.asList("Position", "event", "time", "type of client"));
-        writeLine(writer_2, Arrays.asList("Position", "event", "time", "type of client"));
-        writeLine(writer_3, Arrays.asList("Position", "event", "time", "type of client"));
+        writeLine(writer_1, Arrays.asList("Position", "event", "time", "type of job"));
+        writeLine(writer_2, Arrays.asList("Position", "event", "time", "type of job"));
+        writeLine(writer_3, Arrays.asList("Position", "event", "time", "type of job"));
 
         List<String> list = null;
         List<String> list_2 = null;
