@@ -57,8 +57,7 @@ public class Simulation {
 		String csvFileDGPU = "gpuDataFileCompleted.csv";
 
 
-		CSVM.writeCSV(regular_si, csvFileCR, csvFileSR, csvFileDR);
-		CSVM.writeCSV(GPU_si, csvFileCGPU, csvFileSGPU, csvFileDGPU);
+
 
 
 		String[] events_ = regular_si.getEvents();
