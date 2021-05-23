@@ -55,7 +55,7 @@ public class ServerGPU extends Machine implements CProcess,ProductAcceptor
 			// accept the product
 			product=p;
 			// mark starting time
-			product.stamp(eventlist.getTime(),"Production GPU job started",name);
+			product.stamp(eventlist.getTime(),"Production job started",name);
 			// start production
 			startProduction();
 			// Flag that the product has arrived
