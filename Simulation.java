@@ -87,6 +87,8 @@ public class Simulation {
 			System.out.println("station = " + stations[i]);
 			System.out.println();
 		}
+		CSVM.writeCSV(regular_si, csvFileCR, csvFileSR, csvFileDR);
+		CSVM.writeCSV(GPU_si, csvFileCGPU, csvFileSGPU, csvFileDGPU);
 
 	}
 }
