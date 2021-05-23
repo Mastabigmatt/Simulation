@@ -18,7 +18,7 @@ public class Simulation {
         /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
     	// Create an eventlist
 	CEventList l = new CEventList();
 	
@@ -48,7 +48,17 @@ public class Simulation {
 
 	l.start(20000); // 2000 is maximum time
 
-	
+	String csvFileCR = "regDataFileCreation.csv";
+	String csvFileSR = "regDataFileStarted.csv";
+	String csvFileDR = "regDataFileCompleted.csv";
+	String csvFileCGPU = "gpuDataFileCreation.csv";
+	String csvFileSGPU = "gpuDataFileStarted.csv";
+	String csvFileDGPU = "gpuDataFileCompleted.csv";
+
+
+
+	CSVM.writeCSV(regular_si,csvFileCR, csvFileSR, csvFileDR );
+	CSVM.writeCSV(GPU_si,csvFileCGPU, csvFileSGPU, csvFileDGPU );
 	/**
 	 * 
 	 
