@@ -82,20 +82,20 @@ public class CSVM {
         writeLine(writer_2, Arrays.asList("Position", "event", "time", "type of job"));
         writeLine(writer_3, Arrays.asList("Position", "event", "time", "type of job"));
 
-        List<String> list = null;
-        List<String> list_2 = null;
-        List<String> list_3 = null;
+        List<String> datac = null;
+        List<String> datass = null;
+        List<String> datasc = null;
 
         for (int i = 0; i < numbers.length; i++) {
 
             if (events[i] == "Creation") {
-                addToList(writer_1, i, list, numbers, events, times, stations);
+                addToList(writer_1, i, datac , numbers, events, times, stations);
             }
             if (events[i] == "service started") {
-                addToList(writer_2, i, list_2, numbers, events, times, stations);
+                addToList(writer_2, i, datass, numbers, events, times, stations);
             }
             if (events[i] == "service complete") {
-                addToList(writer_3, i, list_3, numbers, events, times, stations);
+                addToList(writer_3, i, datasc, numbers, events, times, stations);
             }
         }
 
